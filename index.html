@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alvég Caffé LuBen</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>" />
+  <meta name="description" content="Alvég Caffé LuBen — Olasz kávék és desszertek Szombathely-Szentkirályon. Nyitva minden vasárnap 11:00–19:00. Izsó Miklós utca 18. Ingyenes parkolás." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:     #faf4ec;
+      --beige:     #f0e0c8;
+      --caramel:   #c17f4a;
+      --espresso:  #3d2b1f;
+      --mocha:     #6b4226;
+      --gold:      #d4a853;
+      --light-txt: #7a5c45;
+      --white:     #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: var(--cream);
+      color: var(--espresso);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 4rem;
+      background: rgba(250, 244, 236, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(193, 127, 74, 0.15);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 2px 20px rgba(61,43,31,0.08); }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--espresso);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+    .nav-logo span { color: var(--caramel); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mocha);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--caramel); }
+
+    .nav-cta {
+      background: var(--espresso);
+      color: var(--cream) !important;
+      padding: 0.5rem 1.4rem;
+      border-radius: 100px;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--caramel) !important; color: var(--white) !important; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(193,127,74,0.12) 0%, transparent 70%),
+        var(--cream);
+    }
+
+    .hero-bg-circles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .hero-bg-circles span {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(193,127,74,0.08), transparent 70%);
+    }
+    .hero-bg-circles span:nth-child(1) { width: 600px; height: 600px; top: -100px; right: -150px; }
+    .hero-bg-circles span:nth-child(2) { width: 400px; height: 400px; bottom: 0; left: -100px; }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--beige);
+      border: 1px solid var(--caramel);
+      color: var(--caramel);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.45rem 1.2rem;
+      border-radius: 100px;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      line-height: 1.08;
+      color: var(--espresso);
+      margin-bottom: 0.3em;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--caramel);
+    }
+
+    .hero-motto {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      font-style: italic;
+      color: var(--mocha);
+      margin-bottom: 2rem;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--light-txt);
+      max-width: 520px;
+      margin: 0 auto 3rem;
+      line-height: 1.7;
+      font-weight: 300;
+      animation: fadeUp 0.7s 0.3s ease both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp 0.7s 0.4s ease both;
+    }
+
+    .btn-primary {
+      background: var(--espresso);
+      color: var(--cream);
+      text-decoration: none;
+      padding: 0.9rem 2.2rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--caramel); transform: translateY(-2px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--espresso);
+      text-decoration: none;
+      padding: 0.9rem 2.2rem;
+      border-radius: 100px;
+      border: 1.5px solid var(--espresso);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+    }
+    .btn-outline:hover { background: var(--espresso); color: var(--cream); transform: translateY(-2px); }
+
+    .hero-sunday-pill {
+      margin-top: 3.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--espresso);
+      color: var(--cream);
+      padding: 0.6rem 1.5rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      animation: fadeUp 0.7s 0.5s ease both;
+    }
+    .hero-sunday-pill .dot {
+      width: 7px; height: 7px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: pulse 1.8s infinite;
+    }
+
+    /* ── SECTION BASE ── */
+    section { padding: 6rem 2rem; }
+    .container { max-width: 1140px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--caramel);
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--espresso);
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+    }
+    .section-title em { font-style: italic; color: var(--caramel); }
+    .section-desc {
+      font-size: 1rem;
+      color: var(--light-txt);
+      line-height: 1.8;
+      max-width: 560px;
+      font-weight: 300;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--caramel), var(--gold));
+      border-radius: 2px;
+      margin: 1.2rem 0;
+    }
+
+    /* ── ABOUT ── */
+    #rolunk {
+      background: var(--white);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .about-visual {
+      position: relative;
+    }
+    .about-card-main {
+      background: linear-gradient(135deg, var(--espresso), var(--mocha));
+      border-radius: 24px;
+      padding: 3.5rem 2.5rem;
+      color: var(--cream);
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(61,43,31,0.18);
+    }
+    .about-card-main .cup-icon {
+      font-size: 4rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+    .about-card-main h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+      font-style: italic;
+    }
+    .about-card-main p {
+      font-size: 0.9rem;
+      opacity: 0.75;
+      line-height: 1.6;
+      font-weight: 300;
+    }
+    .about-float-badge {
+      position: absolute;
+      bottom: -1.5rem;
+      right: -1.5rem;
+      background: var(--caramel);
+      color: var(--white);
+      border-radius: 18px;
+      padding: 1.2rem 1.5rem;
+      box-shadow: 0 8px 30px rgba(193,127,74,0.35);
+      text-align: center;
+    }
+    .about-float-badge .big { font-size: 1.8rem; font-weight: 700; display: block; line-height: 1; }
+    .about-float-badge .small { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.85; }
+
+    .about-text { padding-left: 1rem; }
+    .about-values {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .value-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .value-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--beige);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .value-item h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--espresso);
+      margin-bottom: 0.2rem;
+    }
+    .value-item p {
+      font-size: 0.85rem;
+      color: var(--light-txt);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* ── MENU ── */
+    #menu { background: var(--cream); }
+    .menu-header { text-align: center; margin-bottom: 3.5rem; }
+    .menu-header .section-desc { margin: 0 auto; }
+    .menu-header .divider { margin: 1.2rem auto; }
+
+    .menu-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      border: 1.5px solid transparent;
+      background: var(--beige);
+      color: var(--mocha);
+      padding: 0.55rem 1.4rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tab-btn:hover { border-color: var(--caramel); color: var(--caramel); }
+    .tab-btn.active { background: var(--espresso); color: var(--cream); border-color: var(--espresso); }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .menu-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 1.8rem;
+      border: 1px solid rgba(193,127,74,0.12);
+      transition: box-shadow 0.25s, transform 0.25s;
+      display: none;
+    }
+    .menu-card.visible { display: block; }
+    .menu-card:hover { box-shadow: 0 12px 40px rgba(61,43,31,0.1); transform: translateY(-4px); }
+    .menu-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.6rem;
+    }
+    .menu-card-icon { font-size: 2rem; }
+    .menu-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--caramel);
+    }
+    .menu-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--espresso);
+      margin-bottom: 0.4rem;
+    }
+    .menu-card p {
+      font-size: 0.82rem;
+      color: var(--light-txt);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+    .menu-tag {
+      display: inline-block;
+      margin-top: 0.8rem;
+      background: var(--beige);
+      color: var(--mocha);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.7rem;
+      border-radius: 100px;
+    }
+    .menu-detail {
+      font-size: 0.75rem;
+      color: var(--caramel);
+      font-weight: 400;
+      margin-bottom: 0.25rem;
+    }
+    .menu-dual-price {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.1rem;
+    }
+    .menu-dual-price .price-main {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--caramel);
+    }
+    .menu-dual-price .price-alt {
+      font-size: 0.72rem;
+      color: var(--light-txt);
+    }
+    .menu-subcat-header {
+      grid-column: 1 / -1;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mocha);
+      padding: 0.8rem 0 0.4rem;
+      border-bottom: 1px solid rgba(193,127,74,0.18);
+      margin-bottom: 0.2rem;
+      display: none;
+    }
+    .menu-subcat-header.visible { display: block; }
+
+    /* ── HOURS & LOCATION ── */
+    #helyszin { background: var(--espresso); color: var(--cream); }
+    #helyszin .section-label { color: var(--gold); }
+    #helyszin .section-title { color: var(--cream); }
+    #helyszin .section-desc { color: rgba(255,255,255,0.65); }
+    #helyszin .divider { background: linear-gradient(90deg, var(--gold), var(--caramel)); }
+
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .hours-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 2.5rem;
+    }
+    .hours-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .hours-row:last-child { border-bottom: none; }
+    .hours-day { font-size: 0.85rem; color: rgba(255,255,255,0.5); letter-spacing: 0.05em; }
+    .hours-day.sunday { color: var(--gold); font-weight: 700; }
+    .hours-time { font-size: 0.9rem; font-weight: 700; }
+    .hours-time.closed { color: rgba(255,255,255,0.3); font-weight: 400; font-style: italic; }
+    .hours-time.open { color: var(--gold); }
+
+    .sunday-highlight {
+      margin-top: 1.5rem;
+      background: linear-gradient(135deg, rgba(212,168,83,0.18), rgba(193,127,74,0.1));
+      border: 1px solid rgba(212,168,83,0.3);
+      border-radius: 16px;
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .sunday-highlight .s-icon { font-size: 1.6rem; }
+    .sunday-highlight p { font-size: 0.82rem; color: rgba(255,255,255,0.75); line-height: 1.5; font-weight: 300; }
+    .sunday-highlight p strong { color: var(--gold); }
+
+    .location-info { display: flex; flex-direction: column; gap: 1.5rem; }
+    .info-block {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .info-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(212,168,83,0.15);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .info-block h4 { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
+    .info-block p { font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.5; font-weight: 300; }
+
+    /* ── CONTACT ── */
+    #kapcsolat { background: var(--white); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .contact-form {
+      background: var(--cream);
+      border-radius: 24px;
+      padding: 2.5rem;
+    }
+    .contact-form h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      margin-bottom: 1.8rem;
+      color: var(--espresso);
+    }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mocha);
+      margin-bottom: 0.5rem;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.85rem 1.1rem;
+      background: var(--white);
+      border: 1.5px solid rgba(193,127,74,0.2);
+      border-radius: 12px;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.9rem;
+      color: var(--espresso);
+      outline: none;
+      transition: border-color 0.2s;
+      appearance: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: var(--caramel); }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-submit {
+      width: 100%;
+      background: var(--espresso);
+      color: var(--cream);
+      border: none;
+      padding: 1rem;
+      border-radius: 100px;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      margin-top: 0.5rem;
+    }
+    .form-submit:hover { background: var(--caramel); transform: translateY(-2px); }
+
+    .contact-note {
+      margin-top: 1rem;
+      font-size: 0.78rem;
+      color: var(--light-txt);
+      text-align: center;
+      font-weight: 300;
+    }
+
+    .social-section { margin-top: 2rem; }
+    .social-section h4 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mocha);
+      margin-bottom: 1rem;
+    }
+    .social-links { display: flex; gap: 0.8rem; }
+    .social-link {
+      width: 44px;
+      height: 44px;
+      background: var(--beige);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .social-link:hover { background: var(--espresso); transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--espresso);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 2.5rem 2rem;
+      font-size: 0.8rem;
+      font-weight: 300;
+    }
+    footer strong { color: rgba(255,255,255,0.85); }
+    footer .footer-motto {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--gold);
+      font-size: 1rem;
+      margin-bottom: 0.8rem;
+    }
+
+    /* ── QUOTE STRIP ── */
+    .quote-strip {
+      background: var(--espresso);
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+    .quote-strip blockquote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1.25rem, 2.8vw, 1.9rem);
+      color: var(--cream);
+      max-width: 780px;
+      margin: 0 auto;
+      line-height: 1.65;
+      position: relative;
+      padding: 0 2rem;
+    }
+    .quote-strip blockquote::before {
+      content: '\201C';
+      font-size: 7rem;
+      color: var(--caramel);
+      opacity: 0.25;
+      position: absolute;
+      top: -2.5rem;
+      left: -0.5rem;
+      line-height: 1;
+      font-style: normal;
+    }
+    .quote-strip cite {
+      display: block;
+      margin-top: 1.8rem;
+      font-style: normal;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .about-craft {
+      margin: 1.8rem 0 0.5rem;
+      padding: 1.3rem 1.6rem;
+      border-left: 3px solid var(--caramel);
+      background: var(--beige);
+      border-radius: 0 14px 14px 0;
+    }
+    .about-craft p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 0.92rem;
+      color: var(--mocha);
+      line-height: 1.75;
+    }
+
+    /* ── PHOTO SECTION ── */
+    .photo-section { background: var(--white); padding: 5rem 2rem; }
+    .photo-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .photo-frame {
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(61,43,31,0.15);
+      aspect-ratio: 4/5;
+    }
+    .photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--espresso), var(--mocha));
+      padding: 6rem 2rem;
+      text-align: center;
+      color: var(--cream);
+    }
+    .cta-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.2;
+      margin: 0.8rem 0 1rem;
+      color: var(--cream);
+    }
+    .cta-title em { color: var(--gold); font-style: italic; }
+    .cta-sub {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+    }
+    .cta-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+    .btn-cta-primary {
+      background: var(--caramel);
+      color: var(--white);
+      text-decoration: none;
+      padding: 1rem 2.2rem;
+      border-radius: 100px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-cta-primary:hover { background: var(--gold); transform: translateY(-2px); }
+    .btn-cta-outline {
+      background: transparent;
+      color: var(--cream);
+      text-decoration: none;
+      padding: 1rem 2.2rem;
+      border-radius: 100px;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    }
+    .btn-cta-outline:hover { border-color: var(--gold); background: rgba(212,168,83,0.1); transform: translateY(-2px); }
+    .cta-social-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 1rem;
+    }
+    .cta-social-links { display: flex; gap: 0.8rem; justify-content: center; }
+    .cta-social-link {
+      width: 46px; height: 46px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none;
+      color: var(--cream);
+      transition: background 0.2s, transform 0.2s;
+    }
+    .cta-social-link:hover { background: var(--caramel); transform: translateY(-2px); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(1.3); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .about-grid, .location-grid, .contact-grid, .photo-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-float-badge { right: 0.5rem; }
+      section { padding: 4rem 1.5rem; }
+      .photo-section { padding: 4rem 1.5rem; }
+    }
+    @media (max-width: 600px) {
+      .menu-grid { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo">Alvég Caffé <span>LuBen</span></a>
+    <ul class="nav-links">
+      <li><a href="#rolunk">Rólunk</a></li>
+      <li><a href="#menu">Menü</a></li>
+      <li><a href="#helyszin">Helyszín & Kapcsolat</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg-circles">
+      <span></span><span></span>
+    </div>
+    <div>
+      <div class="hero-badge">☕ Olasz kávék és házi készítésű desszertek · Ingyenes parkolás</div>
+      <h1 class="hero-title">Alvég Caffé<br><em>LuBen</em></h1>
+      <p class="hero-motto">"Ha vasárnap, akkor LuBen!"</p>
+      <p class="hero-sub">
+        Szombathely-Szentkirályon, az Izsó Miklós utca 18. alatt vár az Alvég Caffé LuBen —
+        ahol az olasz kávékultúra és a vasárnapi pihenés találkozik.
+        Prémium minőség, felejthetetlen hangulatban.
+      </p>
+      <div class="hero-actions">
+        <a href="#menu" class="btn-primary">Nézd meg a menüt</a>
+        <a href="#helyszin" class="btn-outline">Hogyan találsz meg?</a>
+      </div>
+      <div>
+        <div class="hero-sunday-pill">
+          <span class="dot"></span>
+          Nyitva · Vasárnap · 11:00–19:00
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RÓLUNK -->
+  <section id="rolunk">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-visual reveal">
+          <div class="photo-frame">
+            <img src="Képek/IMG_3739.jpg" alt="Alvég Caffé LuBen — külső homlokzat" loading="lazy" />
+          </div>
+        </div>
+        <div class="about-text reveal">
+          <p class="section-label">A mi történetünk</p>
+          <h2 class="section-title">Nem egy kávézó.<br><em>Egy rituálé.</em></h2>
+          <div class="divider"></div>
+          <p class="section-desc">
+            Az Alvég Caffé LuBen azzal a céllal jött létre, hogy legyen egy barátságos, családias hely, ahová jó betérni egy finom kávéra, süteményre vagy egy frissítő italra. Nálunk az olaszos kávéélmény mellett házias desszertek, limonádék, üdítők és alkoholos italok is várnak, így mindenki megtalálhatja azt, amihez éppen kedve van.
+          </p>
+          <div class="about-craft">
+            <p>A tökéletes kávé nem a véletlenen múlik. Gondosan válogatott alapanyagok és olasz mesterek szakértelme — minden csésze a tradíció és a szenvedély eredménye.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOTÓ SZEKCIÓ -->
+  <section class="photo-section">
+    <div class="photo-inner">
+      <div class="photo-frame reveal">
+        <img src="Képek/IMG_3880.jpg" alt="Alvég Caffé LuBen — teraszunk virágos hangulatban" loading="lazy" />
+      </div>
+      <div class="reveal">
+        <p class="section-label">A helyszín</p>
+        <h2 class="section-title">Igazi hely,<br><em>valódi élmény.</em></h2>
+        <div class="divider"></div>
+        <p class="section-desc">
+          Teraszunk, asztalunk és minden csészénk arra vár, hogy te is részese legyél
+          az Alvég Caffé LuBen hangulatának. Látogass el hozzánk — legközelebb vasárnap!
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- IDÉZET SÁV -->
+  <div class="quote-strip">
+    <blockquote>
+      A jó kávé nem csak egy ital, hanem egy életérzés.
+      <cite>Alvég Caffé LuBen</cite>
+    </blockquote>
+  </div>
+
+  <!-- MENÜ -->
+  <section id="menu">
+    <div class="container">
+      <div class="menu-header reveal">
+        <p class="section-label">Kínálatunk</p>
+        <h2 class="section-title">A vasárnap <em>ízei</em></h2>
+        <div class="divider"></div>
+        <p class="section-desc">
+          Olasz pörkölésű kávék, frissítők, borok és házi készítésű sütemények, desszertek — minden vasárnapon.
+        </p>
+      </div>
+      <div class="menu-tabs">
+        <button class="tab-btn active" data-tab="kavek">Kávék</button>
+        <button class="tab-btn" data-tab="koffein">Koffeinmentes</button>
+        <button class="tab-btn" data-tab="uditok">Üdítők & Tea</button>
+        <button class="tab-btn" data-tab="borok">Borok</button>
+        <button class="tab-btn" data-tab="sorok">Sörök</button>
+        <button class="tab-btn" data-tab="rovid">Röviditalok</button>
+        <button class="tab-btn" data-tab="desszert">Desszertek</button>
+      </div>
+      <div class="menu-grid">
+
+        <!-- ── KÁVÉK ── -->
+        <div class="menu-card visible" data-cat="kavek">
+          <div class="menu-card-top"><span class="menu-card-icon">☕</span><span class="menu-price">690 Ft</span></div>
+          <h3>Espresso</h3>
+          <p>Testes, intenzív, vastag cremával. Az olasz kávéélmény.</p>
+          <span class="menu-tag">Klasszikus</span>
+        </div>
+        <div class="menu-card visible" data-cat="kavek">
+          <div class="menu-card-top"><span class="menu-card-icon">☕</span><span class="menu-price">690 Ft</span></div>
+          <h3>Ristretto</h3>
+          <p>Kisebb, kevesebb koffein, olaszoknál tökéletes ital a késő délutáni időszakban.</p>
+        </div>
+        <div class="menu-card visible" data-cat="kavek">
+          <div class="menu-card-top"><span class="menu-card-icon">☕☕</span><span class="menu-price">1 140 Ft</span></div>
+          <h3>Doppio</h3>
+          <p>Dupla espresso — dupla élmény. Ha az egy adag nem elég.</p>
+        </div>
+        <div class="menu-card visible" data-cat="kavek">
+          <div class="menu-card-top"><span class="menu-card-icon">☕💧</span><span class="menu-price">850 Ft</span></div>
+          <h3>Lungo</h3>
+          <p>Hosszú kávé, ha hosszabb ideig szereted a kávé ízvilágát.</p>
+        </div>
+        <div class="menu-card visible" data-cat="kavek">
+          <div class="menu-card-top"><span class="menu-card-icon">☕💧💧</span><span class="menu-price">990 Ft</span></div>
+          <h3>Americano</h3>
+          <p>Espresso forró vízzel hígítva — hosszú, de karakteres ízvilág.</p>
+        </div>
+        <div class="menu-card visible" data-cat="kavek">
+          <div class="menu-card-top"><span class="menu-card-icon">☕🥛</span><span class="menu-price">1 190 Ft</span></div>
+          <h3>Cappuccino</h3>
+          <p>Espresso és selymes tejhab tökéletes arányban — az olasz vasárnap szimbóluma.</p>
+          <span class="menu-tag">Legnépszerűbb</span>
+        </div>
+        <div class="menu-card visible" data-cat="kavek">
+          <div class="menu-card-top"><span class="menu-card-icon">☕</span><span class="menu-price">890 Ft</span></div>
+          <h3>Espresso Macchiato</h3>
+          <p>Espresso egy folt tejhabbal — elegáns és határozott.</p>
+        </div>
+        <div class="menu-card visible" data-cat="kavek">
+          <div class="menu-card-top"><span class="menu-card-icon">☕🥛</span><span class="menu-price">990 Ft</span></div>
+          <h3>Cortado</h3>
+          <p>Espresso egyenlő arányú tejjel — finom egyensúly erő és krémesség között.</p>
+        </div>
+        <div class="menu-card visible" data-cat="kavek">
+          <div class="menu-card-top"><span class="menu-card-icon">☕🥛</span><span class="menu-price">1 490 Ft</span></div>
+          <h3>Flat White</h3>
+          <p>Dupla ristretto, tejhabbal. Intenzívebb kávéíz.</p>
+        </div>
+        <div class="menu-card visible" data-cat="kavek">
+          <div class="menu-card-top"><span class="menu-card-icon">🥛☕🥛</span><span class="menu-price">1 390 Ft</span></div>
+          <h3>Latte Macchiato</h3>
+          <p>Réteges tej és espresso — az igazi látványkávé.</p>
+        </div>
+        <div class="menu-card visible" data-cat="kavek">
+          <div class="menu-card-top"><span class="menu-card-icon">☕🥛🥛</span><span class="menu-price">1 290 Ft</span></div>
+          <h3>Caffè Latte</h3>
+          <p>Espresso és a tejesebb kedvelőknek egy könnyedebb, komfortos kávéital.</p>
+        </div>
+        <div class="menu-card visible" data-cat="kavek">
+          <div class="menu-card-top"><span class="menu-card-icon">☕🥛🍯</span><span class="menu-price">1 290 Ft</span></div>
+          <h3>Melange</h3>
+          <p>Kávé tejjel és tejhabbal — lágy és harmonikus ízvilág mézzel összekeverve.</p>
+        </div>
+        <div class="menu-card visible" data-cat="kavek">
+          <div class="menu-card-top"><span class="menu-card-icon">☕🥛🍫</span><span class="menu-price">1 490 Ft</span></div>
+          <h3>Mocha</h3>
+          <p>Espresso és belga csokoládé — kényeztetés egy csészében.</p>
+        </div>
+
+        <!-- ── KOFFEINMENTES ── -->
+        <div class="menu-card" data-cat="koffein">
+          <div class="menu-card-top"><span class="menu-card-icon">🍼</span><span class="menu-price">590 Ft</span></div>
+          <h3>Babyccino</h3>
+          <p>Meleg felgőzölt tejhabbal — a legkisebb vendégek kedvence.</p>
+          <span class="menu-tag">Gyerekeknek</span>
+        </div>
+        <div class="menu-card" data-cat="koffein">
+          <div class="menu-card-top"><span class="menu-card-icon">🍫</span><span class="menu-price">890 Ft</span></div>
+          <h3>Kakaó</h3>
+          <p>Forró, krémes, igazi kakaó tejjel — koffeinmentes kényeztetés.</p>
+          <span class="menu-tag">Koffeinmentes</span>
+        </div>
+
+        <!-- ── ÜDÍTŐK & TEA ── -->
+        <!-- Szénsavas -->
+        <div class="menu-subcat-header" data-subcat="uditok">Szénsavas üdítők</div>
+        <div class="menu-card" data-cat="uditok">
+          <div class="menu-card-top">
+            <span class="menu-card-icon">🥤</span>
+            <div class="menu-dual-price"><span class="price-main">690 Ft</span><span class="price-alt">0,25 L</span></div>
+          </div>
+          <h3>Coca-Cola / Coca-Cola Zero / Kinley Tonic</h3>
+        </div>
+        <div class="menu-card" data-cat="uditok">
+          <div class="menu-card-top">
+            <span class="menu-card-icon">🥤</span>
+            <div class="menu-dual-price"><span class="price-main">160 Ft</span><span class="price-alt">0,1 L</span></div>
+          </div>
+          <h3>Fanta narancs</h3>
+        </div>
+        <div class="menu-card" data-cat="uditok">
+          <div class="menu-card-top">
+            <span class="menu-card-icon">🫚</span>
+            <div class="menu-dual-price"><span class="price-main">790 Ft</span><span class="price-alt">0,5 L</span></div>
+          </div>
+          <h3>Kinley gyömbér</h3>
+        </div>
+        <div class="menu-card" data-cat="uditok">
+          <div class="menu-card-top">
+            <span class="menu-card-icon">🍇</span>
+            <div class="menu-dual-price"><span class="price-main">790 Ft</span><span class="price-alt">0,5 L</span></div>
+          </div>
+          <h3>Márka szőlő</h3>
+        </div>
+        <div class="menu-card" data-cat="uditok">
+          <div class="menu-card-top">
+            <span class="menu-card-icon">🍋</span>
+            <div class="menu-dual-price"><span class="price-main">790 Ft</span><span class="price-alt">0,5 L</span></div>
+          </div>
+          <h3>Ice Tea citrom</h3>
+        </div>
+        <div class="menu-card" data-cat="uditok">
+          <div class="menu-card-top">
+            <span class="menu-card-icon">🍋🌸🍓</span>
+            <div class="menu-dual-price"><span class="price-main">190 Ft</span><span class="price-alt">0,1 L</span></div>
+          </div>
+          <h3>Limonádé</h3>
+          <p>Citromos 🍋, bodza 🌸 vagy eper 🍓 ízben.</p>
+        </div>
+        <div class="menu-card" data-cat="uditok">
+          <div class="menu-card-top">
+            <span class="menu-card-icon">💧</span>
+            <div class="menu-dual-price"><span class="price-main">550 Ft</span><span class="price-alt">0,33 L</span></div>
+          </div>
+          <h3>Naturaqua ásványvíz</h3>
+          <p>Szénsavas vagy szénsavmentes.</p>
+        </div>
+        <div class="menu-card" data-cat="uditok">
+          <div class="menu-card-top">
+            <span class="menu-card-icon">💧</span>
+            <div class="menu-dual-price"><span class="price-main">100 Ft</span><span class="price-alt">0,1 L</span></div>
+          </div>
+          <h3>Szódavíz</h3>
+        </div>
+        <!-- Rostos -->
+        <div class="menu-card" data-cat="uditok">
+          <div class="menu-card-top">
+            <span class="menu-card-icon">🍑</span>
+            <div class="menu-dual-price"><span class="price-main">200 Ft</span><span class="price-alt">0,1 L</span></div>
+          </div>
+          <h3>Sió őszibarack / alma</h3>
+          <span class="menu-tag">Rostos</span>
+        </div>
+        <div class="menu-card" data-cat="uditok">
+          <div class="menu-card-top">
+            <span class="menu-card-icon">🍊</span>
+            <div class="menu-dual-price"><span class="price-main">250 Ft</span><span class="price-alt">0,1 L</span></div>
+          </div>
+          <h3>Narancs 100%</h3>
+          <span class="menu-tag">Rostos</span>
+        </div>
+        <!-- Forró tea -->
+        <div class="menu-card" data-cat="uditok">
+          <div class="menu-card-top">
+            <span class="menu-card-icon">🍵</span>
+            <div class="menu-dual-price"><span class="price-main">700 Ft</span><span class="price-alt">1 filter</span></div>
+          </div>
+          <h3>Lipton fekete tea</h3>
+          <span class="menu-tag">Forró tea</span>
+        </div>
+        <div class="menu-card" data-cat="uditok">
+          <div class="menu-card-top">
+            <span class="menu-card-icon">🌸</span>
+            <div class="menu-dual-price"><span class="price-main">700 Ft</span><span class="price-alt">1 filter</span></div>
+          </div>
+          <h3>Gyümölcstea</h3>
+          <span class="menu-tag">Forró tea</span>
+        </div>
+
+        <!-- ── BOROK ── -->
+        <div class="menu-card" data-cat="borok">
+          <div class="menu-card-top">
+            <span class="menu-card-icon">🥂</span>
+            <div class="menu-dual-price"><span class="price-main">240 Ft</span><span class="price-alt">0,1 L · 2 400 Ft/L</span></div>
+          </div>
+          <h3>Tolnai Olaszrizling</h3>
+          <p>Száraz fehérbor, friss gyümölcsös ízvilággal.</p>
+          <span class="menu-tag">Fehérbor · Száraz</span>
+        </div>
+        <div class="menu-card" data-cat="borok">
+          <div class="menu-card-top">
+            <span class="menu-card-icon">🥂</span>
+            <div class="menu-dual-price"><span class="price-main">240 Ft</span><span class="price-alt">0,1 L · 2 400 Ft/L</span></div>
+          </div>
+          <h3>Balatoni Szürkebarát</h3>
+          <p>Félédes fehérbor, kellemes kerekded zamattal.</p>
+          <span class="menu-tag">Fehérbor · Félédes</span>
+        </div>
+        <div class="menu-card" data-cat="borok">
+          <div class="menu-card-top">
+            <span class="menu-card-icon">🥂</span>
+            <div class="menu-dual-price"><span class="price-main">260 Ft</span><span class="price-alt">0,1 L · 2 600 Ft/L</span></div>
+          </div>
+          <h3>Irsai Olivér</h3>
+          <p>Illatos, virágos fehérbor, szép savszerkezettel.</p>
+          <span class="menu-tag">Fehérbor</span>
+        </div>
+        <div class="menu-card" data-cat="borok">
+          <div class="menu-card-top">
+            <span class="menu-card-icon">🍷</span>
+            <div class="menu-dual-price"><span class="price-main">260 Ft</span><span class="price-alt">0,1 L · 2 600 Ft/L</span></div>
+          </div>
+          <h3>Tolnai Kékfrankos</h3>
+          <p>Száraz vörösbor, karakteres tanninokkal és gyümölcsös aromával.</p>
+          <span class="menu-tag">Vörösbor · Száraz</span>
+        </div>
+        <div class="menu-card" data-cat="borok">
+          <div class="menu-card-top">
+            <span class="menu-card-icon">🍷</span>
+            <div class="menu-dual-price"><span class="price-main">260 Ft</span><span class="price-alt">0,1 L · 2 600 Ft/L</span></div>
+          </div>
+          <h3>Tolnai Merlot</h3>
+          <p>Félédes vörösbor, bársonyos, lágy ízvilággal.</p>
+          <span class="menu-tag">Vörösbor · Félédes</span>
+        </div>
+        <div class="menu-card" data-cat="borok">
+          <div class="menu-card-top">
+            <span class="menu-card-icon">🍷</span>
+            <div class="menu-dual-price"><span class="price-main">260 Ft</span><span class="price-alt">0,1 L · 2 600 Ft/L</span></div>
+          </div>
+          <h3>Szekszárdi Kékfrankos Rozé</h3>
+          <p>Száraz rozébor, telt és harmonikus karakterrel.</p>
+          <span class="menu-tag">Rozébor · Száraz</span>
+        </div>
+        <div class="menu-card" data-cat="borok">
+          <div class="menu-card-top">
+            <span class="menu-card-icon">🍾</span>
+            <div class="menu-dual-price"><span class="price-main">3 590 Ft</span><span class="price-alt">0,75 L</span></div>
+          </div>
+          <h3>Törley Charmant Doux</h3>
+          <p>Édes pezsgő, kellemes buborékokkal — ünnepi pillanatokra.</p>
+          <span class="menu-tag">Pezsgő · Édes</span>
+        </div>
+        <div class="menu-card" data-cat="borok">
+          <div class="menu-card-top">
+            <span class="menu-card-icon">🍾</span>
+            <div class="menu-dual-price"><span class="price-main">3 590 Ft</span><span class="price-alt">0,75 L</span></div>
+          </div>
+          <h3>Törley Gala Sec</h3>
+          <p>Száraz pezsgő, elegáns és frissítő — kávézóhoz tökéletes pár.</p>
+          <span class="menu-tag">Pezsgő · Száraz</span>
+        </div>
+
+        <!-- ── SÖRÖK ── -->
+        <div class="menu-card" data-cat="sorok">
+          <div class="menu-card-top">
+            <span class="menu-card-icon">🍺</span>
+            <div class="menu-dual-price"><span class="price-main">750 Ft</span><span class="price-alt">0,5 L</span></div>
+          </div>
+          <h3>Soproni sör</h3>
+          <span class="menu-tag">Palackozott</span>
+        </div>
+        <div class="menu-card" data-cat="sorok">
+          <div class="menu-card-top">
+            <span class="menu-card-icon">🍺</span>
+            <div class="menu-dual-price"><span class="price-main">850 Ft</span><span class="price-alt">0,5 L</span></div>
+          </div>
+          <h3>Gösser</h3>
+          <span class="menu-tag">Palackozott</span>
+        </div>
+        <div class="menu-card" data-cat="sorok">
+          <div class="menu-card-top">
+            <span class="menu-card-icon">🍺</span>
+            <div class="menu-dual-price"><span class="price-main">750 Ft</span><span class="price-alt">0,33 L</span></div>
+          </div>
+          <h3>Gösser Natur Radler alkoholmentes</h3>
+          <span class="menu-tag">Alkoholmentes</span>
+        </div>
+        <div class="menu-card" data-cat="sorok">
+          <div class="menu-card-top">
+            <span class="menu-card-icon">🍺</span>
+            <div class="menu-dual-price"><span class="price-main">850 Ft</span><span class="price-alt">0,33 L</span></div>
+          </div>
+          <h3>Heineken</h3>
+          <span class="menu-tag">Palackozott</span>
+        </div>
+        <div class="menu-card" data-cat="sorok">
+          <div class="menu-card-top">
+            <span class="menu-card-icon">🍺</span>
+            <div class="menu-dual-price"><span class="price-main">750 Ft</span><span class="price-alt">0,5 L</span></div>
+          </div>
+          <h3>Soproni alkoholmentes</h3>
+          <span class="menu-tag">Alkoholmentes</span>
+        </div>
+        <div class="menu-card" data-cat="sorok">
+          <div class="menu-card-top">
+            <span class="menu-card-icon">🍺</span>
+            <div class="menu-dual-price"><span class="price-main">1 150 Ft</span><span class="price-alt">0,5 L</span></div>
+          </div>
+          <h3>Edelweiss</h3>
+          <span class="menu-tag">Palackozott</span>
+        </div>
+        <div class="menu-card" data-cat="sorok">
+          <div class="menu-card-top">
+            <span class="menu-card-icon">🍺</span>
+            <div class="menu-dual-price"><span class="price-main">1 050 Ft</span><span class="price-alt">0,5 L</span></div>
+          </div>
+          <h3>Staropramen barna</h3>
+          <span class="menu-tag">Palackozott</span>
+        </div>
+        <div class="menu-card" data-cat="sorok">
+          <div class="menu-card-top">
+            <span class="menu-card-icon">🍺</span>
+            <div class="menu-dual-price"><span class="price-main">700 Ft</span><span class="price-alt">0,5 L</span></div>
+          </div>
+          <h3>Löwenbräu</h3>
+          <span class="menu-tag">Palackozott</span>
+        </div>
+
+        <!-- ── RÖVIDITALOK ── -->
+        <div class="menu-card" data-cat="rovid">
+          <div class="menu-card-top"><span class="menu-card-icon">🥃</span>
+            <div class="menu-dual-price"><span class="price-main">600 / 1 200 Ft</span><span class="price-alt">2 cl / 4 cl</span></div>
+          </div>
+          <h3>Ágyas pálinka szilva</h3>
+          <span class="menu-tag">Pálinka</span>
+        </div>
+        <div class="menu-card" data-cat="rovid">
+          <div class="menu-card-top"><span class="menu-card-icon">🥃</span>
+            <div class="menu-dual-price"><span class="price-main">600 / 1 200 Ft</span><span class="price-alt">2 cl / 4 cl</span></div>
+          </div>
+          <h3>Ágyas pálinka barack</h3>
+          <span class="menu-tag">Pálinka</span>
+        </div>
+        <div class="menu-card" data-cat="rovid">
+          <div class="menu-card-top"><span class="menu-card-icon">🥃</span>
+            <div class="menu-dual-price"><span class="price-main">600 / 1 200 Ft</span><span class="price-alt">2 cl / 4 cl</span></div>
+          </div>
+          <h3>Jägermeister likőr</h3>
+          <span class="menu-tag">Likőr</span>
+        </div>
+        <div class="menu-card" data-cat="rovid">
+          <div class="menu-card-top"><span class="menu-card-icon">🥃</span>
+            <div class="menu-dual-price"><span class="price-main">600 / 1 200 Ft</span><span class="price-alt">2 cl / 4 cl</span></div>
+          </div>
+          <h3>Zwack Unicum keserű likőr</h3>
+          <span class="menu-tag">Likőr</span>
+        </div>
+        <div class="menu-card" data-cat="rovid">
+          <div class="menu-card-top"><span class="menu-card-icon">🥃</span>
+            <div class="menu-dual-price"><span class="price-main">600 / 1 200 Ft</span><span class="price-alt">2 cl / 4 cl</span></div>
+          </div>
+          <h3>Bacardi Superior rum</h3>
+          <span class="menu-tag">Rum</span>
+        </div>
+        <div class="menu-card" data-cat="rovid">
+          <div class="menu-card-top"><span class="menu-card-icon">🥃</span>
+            <div class="menu-dual-price"><span class="price-main">600 / 1 200 Ft</span><span class="price-alt">2 cl / 4 cl</span></div>
+          </div>
+          <h3>Finlandia vodka</h3>
+          <span class="menu-tag">Vodka</span>
+        </div>
+        <div class="menu-card" data-cat="rovid">
+          <div class="menu-card-top"><span class="menu-card-icon">🥃</span>
+            <div class="menu-dual-price"><span class="price-main">600 / 1 200 Ft</span><span class="price-alt">2 cl / 4 cl</span></div>
+          </div>
+          <h3>Finsbury Gin</h3>
+          <span class="menu-tag">Gin</span>
+        </div>
+        <div class="menu-card" data-cat="rovid">
+          <div class="menu-card-top"><span class="menu-card-icon">🥃</span>
+            <div class="menu-dual-price"><span class="price-main">600 / 1 200 Ft</span><span class="price-alt">2 cl / 4 cl</span></div>
+          </div>
+          <h3>Baileys ír krémlikőr</h3>
+          <span class="menu-tag">Likőr</span>
+        </div>
+        <div class="menu-card" data-cat="rovid">
+          <div class="menu-card-top"><span class="menu-card-icon">🥃</span>
+            <div class="menu-dual-price"><span class="price-main">600 / 1 200 Ft</span><span class="price-alt">2 cl / 4 cl</span></div>
+          </div>
+          <h3>St. Hubertus gyógynövénylikőr</h3>
+          <span class="menu-tag">Likőr</span>
+        </div>
+        <div class="menu-card" data-cat="rovid">
+          <div class="menu-card-top"><span class="menu-card-icon">🥃</span>
+            <div class="menu-dual-price"><span class="price-main">700 / 1 400 Ft</span><span class="price-alt">2 cl / 4 cl</span></div>
+          </div>
+          <h3>Jack Daniel's Tennessee whiskey</h3>
+          <span class="menu-tag">Whiskey</span>
+        </div>
+
+        <!-- ── DESSZERTEK ── -->
+        <div class="menu-card" data-cat="desszert">
+          <div class="menu-card-top">
+            <span class="menu-card-icon">🍰</span>
+          </div>
+          <h3>Házi desszertek</h3>
+          <p>Heti meglepetés kínálat — mindig más, mindig friss, mindig házi. Érdeklődjön személyesen, vagy kövessen minket Facebookon, Instagrammon!</p>
+          <span class="menu-tag">Házi készítésű</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HELYSZÍN & NYITVATARTÁS -->
+  <section id="helyszin">
+    <div class="container">
+      <div class="location-grid">
+        <div class="reveal">
+          <p class="section-label">Mikor & Hol</p>
+          <h2 class="section-title">Találkozz<br><em>velünk!</em></h2>
+          <div class="divider"></div>
+          <p class="section-desc">
+            Csak vasárnaponként vagyunk nyitva — de akkor teljes szívvel.
+          </p>
+          <div style="margin-top: 2.5rem;">
+            <div class="location-info">
+              <div class="info-block">
+                <div class="info-icon">📍</div>
+                <div>
+                  <h4>Helyszín</h4>
+                  <p>9700 Szombathely-Szentkirály<br>Izsó Miklós utca 18.</p>
+                  <a href="https://maps.google.com/?q=Izsó+Miklós+utca+18,+9700+Szombathely" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;margin-top:0.6rem;font-size:0.8rem;font-weight:700;color:var(--gold);text-decoration:none;letter-spacing:0.05em;">📍 Megmutatom a térképen</a>
+                </div>
+              </div>
+              <div class="info-block">
+                <div class="info-icon">📞</div>
+                <div>
+                  <h4>Telefonszám</h4>
+                  <p><a href="tel:+36203895692" style="color:inherit;text-decoration:none;">+36 20 389 5692</a><br><a href="tel:+36205957806" style="color:inherit;text-decoration:none;">+36 20 595 7806</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="hours-card">
+            <h3>Nyitvatartás</h3>
+            <div class="hours-row"><span class="hours-day">Hétfő</span><span class="hours-time closed">Zárva</span></div>
+            <div class="hours-row"><span class="hours-day">Kedd</span><span class="hours-time closed">Zárva</span></div>
+            <div class="hours-row"><span class="hours-day">Szerda</span><span class="hours-time closed">Zárva</span></div>
+            <div class="hours-row"><span class="hours-day">Csütörtök</span><span class="hours-time closed">Zárva</span></div>
+            <div class="hours-row"><span class="hours-day">Péntek</span><span class="hours-time closed">Zárva</span></div>
+            <div class="hours-row"><span class="hours-day">Szombat</span><span class="hours-time closed">Zárva</span></div>
+            <div class="hours-row" style="background: rgba(212,168,83,0.08); border-radius: 10px; padding: 1rem; margin-top: 0.5rem;">
+              <span class="hours-day sunday">☀️ Vasárnap</span>
+              <span class="hours-time open">11:00 – 19:00</span>
+            </div>
+            <div class="sunday-highlight">
+              <span class="s-icon">✨</span>
+              <p>
+                <strong>Csak vasárnaponként vagyunk nyitva</strong> — épp ezért különleges.
+                Tedd emlékezetessé a heted utolsó napját nálunk!
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CTA SZEKCIÓ -->
+  <section class="cta-section">
+    <div class="container">
+      <p class="section-label" style="color:var(--gold);">Várunk rád!</p>
+      <h2 class="cta-title">Látogass el hozzánk<br><em>vasárnap!</em></h2>
+      <p class="cta-sub">Szombathely-Szentkirály · Izsó Miklós utca 18. · Vasárnap 11:00–19:00</p>
+      <div class="cta-actions">
+        <a href="tel:+36203895692" class="btn-cta-primary">📞 Hívj most!</a>
+        <a href="https://maps.google.com/?q=Izsó+Miklós+utca+18,+9700+Szombathely" target="_blank" rel="noopener" class="btn-cta-outline">🗺️ Navigálj oda!</a>
+      </div>
+      <p class="cta-social-label">Kövess minket</p>
+      <div class="cta-social-links">
+        <a href="https://www.facebook.com/people/Alvég-Caffé-LuBen/61579497719082/" target="_blank" rel="noopener" class="cta-social-link" aria-label="Facebook">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/alveg.caffeluben" target="_blank" rel="noopener" class="cta-social-link" aria-label="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@alveg.caffeluben" target="_blank" rel="noopener" class="cta-social-link" aria-label="TikTok">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.14a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.57z"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-motto">"Ha vasárnap, akkor LuBen!"</p>
+    <p>&copy; 2026 <strong>Alvég Caffé LuBen</strong> · Minden jog fenntartva</p>
+    <p style="margin-top: 0.4rem;">9700 Szombathely-Szentkirály, Izsó Miklós utca 18. · Nyitva: vasárnap 11:00–19:00</p>
+  </footer>
+
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 30);
+    });
+
+    // Reveal on scroll
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => io.observe(el));
+
+    // Menu tabs
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const menuCards = document.querySelectorAll('.menu-card');
+    const subcatHeaders = document.querySelectorAll('.menu-subcat-header');
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const cat = btn.dataset.tab;
+        menuCards.forEach(card => {
+          card.classList.toggle('visible', card.dataset.cat === cat);
+        });
+        subcatHeaders.forEach(hdr => {
+          hdr.classList.toggle('visible', hdr.dataset.subcat === cat);
+        });
+      });
+    });
+
+    // Form submit
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.form-submit');
+      btn.textContent = '✓ Foglalás elküldve! Hamarosan visszajelzünk.';
+      btn.style.background = '#4a7c59';
+      btn.disabled = true;
+    }
+  </script>
+</body>
+</html>
